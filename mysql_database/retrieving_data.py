@@ -25,4 +25,5 @@ sql = """SELECT dp.price_date, dp.adj_close_price
 goog = psql.frame_query(sql, con=con, index_col='price_date')    
 
 # Output the dataframe tail
-print goog.tail()
+print goog
+

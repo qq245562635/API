@@ -10,3 +10,6 @@ if 'GOOG' in dict:
 else:
     print "YES"
 print dict
+
+import sys
+print sys.version

@@ -47,9 +47,6 @@ def get_google_data(symbol, interval, period):
     df.columns = ['Time', 'Open', 'High', 'Low', 'Close', 'Volume']
     df.index = df.Time
     del df['Time']
-    
-     
-
     return df
 
 if __name__=="__main__":
