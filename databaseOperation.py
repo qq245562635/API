@@ -52,9 +52,12 @@ dfres.index = dfres.priceDate
 del dfres['ID']
 del dfres['Symbol']
 del dfres['priceDate']
+print dfres
+'''
 pType = 'adjClosePrice'
 price = dfres[pType]
 date = dt.date(2015,6,2)
 print price[date]
 print "..."
+'''
 #print yf_data
