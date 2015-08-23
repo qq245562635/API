@@ -52,8 +52,9 @@ dfres.index = dfres.priceDate
 del dfres['ID']
 del dfres['Symbol']
 del dfres['priceDate']
-price = dfres.adjClosePrice
-if 560 > 530.0:
-    print price.index.values
-    print "..."
+pType = 'adjClosePrice'
+price = dfres[pType]
+date = dt.date(2015,6,2)
+print price[date]
+print "..."
 #print yf_data

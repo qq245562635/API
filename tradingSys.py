@@ -1,9 +1,15 @@
+
 import numpy as np
 import pandas as pd
 import MySQLdb as mdb
 
-initialCash = 100000.0
-initialEquity = 0.0
+class portfolio(object):
+    initialCash = 100000.0
+    initialEquity = 0.0
+
+    cash = initialCash
+equity = initialEquity
+portfolio = {}
 
 hostName = 'localhost'
 userName = 'sec_user'
@@ -16,6 +22,7 @@ def fetchDataFromDB(symbol,beginDate,endDate):
     retrieveCommond = "select * from dailyStockMarket where Symbol = '%s'and priceDate >= '%s'and priceDate <= '%s'"%(symbol,beginDate,endDate)
     cursor.execute(retrieveCommond)
     results = cursor.fetchall()
+    db.close()
     resList = []
     for item in results:
         resList.append(item)
@@ -26,6 +33,17 @@ def fetchDataFromDB(symbol,beginDate,endDate):
     del dataDF['Symbol']
     del dataDF['priceDate']
     return dataDF
-    db.close()
 
 def fetchPortfolioData(stockList, beginDate, endDate):
+    portfolioData = {}
+    for stock in stockList:
+        portfolioData[stock] = fetchDataFromDB(stock,beginDate,endDate)
+    return portfolioData
+
+def order(stock, shares, price):
+    cash = cash - price * shares
+    equity = price * shares
+    shares = shares;
+
+
+
