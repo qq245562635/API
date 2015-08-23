@@ -42,7 +42,7 @@ def fetchDataFromDB(symbol,beginDate,endDate):
 
 for sym in symbol:
     loadDataIntoDB(sym,beginDate,endDate)
-'''
+
 res = fetchDataFromDB("GOOG",beginDate,endDate)
 resl =[]
 for item in res:
@@ -53,26 +53,15 @@ dfres.index = dfres.priceDate
 del dfres['ID']
 del dfres['Symbol']
 del dfres['priceDate']
-<<<<<<< HEAD
 print dfres
 '''
-=======
-<<<<<<< Updated upstream
->>>>>>> origin/master
 pType = 'adjClosePrice'
 price = dfres[pType]
 date = dt.date(2015,6,2)
 print price[date]
 print "..."
-<<<<<<< HEAD
-'''
-=======
-=======
 price = dfres.adjClosePrice
 if 560 > 530.0:
     print price.index.values
     print "..."
 '''
->>>>>>> Stashed changes
->>>>>>> origin/master
-#print yf_data
