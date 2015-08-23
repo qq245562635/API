@@ -22,10 +22,11 @@ def loadDataIntoDB(symbol = None, beginDate=None, endDate = None):
     yf_data = urllib2.urlopen(yahoo_url).readlines()[1:]
     for data in yf_data:
         cdata = data.split(',')
-        insertCommond = """INSERT INTO dailyStockMarket(Symbol, priceDate, openPrice, highPrice, lowPrice, closePrice, adjClosePrice, Volume) VALUES ('%s', '%s', '%s', '%s', '%s', '%s','%s','%s')"""%(symbol,cdata[0],cdata[1],float(cdata[2]),float(cdata[3]),float(cdata[4]),float(cdata[6]),int(cdata[5]))
+        insertCommond = "INSERT INTO dailyStockMarket(Symbol, priceDate, openPrice, highPrice, lowPrice, closePrice, adjClosePrice, Volume) VALUES ('%s', '%s', '%s', '%s', '%s', '%s','%s','%s')"%(symbol,cdata[0],cdata[1],float(cdata[2]),float(cdata[3]),float(cdata[4]),float(cdata[6]),int(cdata[5]))
         cursor.execute(insertCommond)
         db.commit()
     db.close()
+
 def fetchDataFromDB(symbol,beginDate,endDate):
     hostName = 'localhost'
     userName = 'sec_user'
@@ -39,9 +40,9 @@ def fetchDataFromDB(symbol,beginDate,endDate):
     return results
     db.close()
 
-#for sym in symbol:
-#    loadDataIntoDB(sym,beginDate,endDate)
-
+for sym in symbol:
+    loadDataIntoDB(sym,beginDate,endDate)
+'''
 res = fetchDataFromDB("GOOG",beginDate,endDate)
 resl =[]
 for item in res:
@@ -52,9 +53,17 @@ dfres.index = dfres.priceDate
 del dfres['ID']
 del dfres['Symbol']
 del dfres['priceDate']
+<<<<<<< Updated upstream
 pType = 'adjClosePrice'
 price = dfres[pType]
 date = dt.date(2015,6,2)
 print price[date]
 print "..."
+=======
+price = dfres.adjClosePrice
+if 560 > 530.0:
+    print price.index.values
+    print "..."
+'''
+>>>>>>> Stashed changes
 #print yf_data
