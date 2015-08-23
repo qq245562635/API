@@ -1,10 +1,11 @@
 __author__ = 'Conan'
 #!/usr/bin/python
 
+import pandas as pd
 import urllib2
 import MySQLdb as mdb
 import datetime as dt
-
+import matplotlib.pyplot as plt
 
 symbol = ['AMZN','AAPL','GOOG']
 beginDate = dt.date(2015,6,1)
@@ -35,9 +36,24 @@ def fetchDataFromDB(symbol,beginDate,endDate):
     retrieveCommond = "select * from dailyStockMarket where Symbol = '%s'and priceDate >= '%s'and priceDate <= '%s'"%(symbol,beginDate,endDate)
     cursor.execute(retrieveCommond)
     results = cursor.fetchall()
+    return results
     db.close()
 
-for sym in symbol:
-    loadDataIntoDB(sym,beginDate,endDate)
+#for sym in symbol:
+#    loadDataIntoDB(sym,beginDate,endDate)
 
+res = fetchDataFromDB("GOOG",beginDate,endDate)
+resl =[]
+for item in res:
+    resl.append(item)
+dfres = pd.DataFrame(resl)
+dfres.columns = ['ID','Symbol','priceDate', 'openPrice', 'highPrice', 'lowPrice', 'closePrice', 'adjClosePrice','Volume']
+dfres.index = dfres.priceDate
+del dfres['ID']
+del dfres['Symbol']
+del dfres['priceDate']
+price = dfres.adjClosePrice
+if 560 > 530.0:
+    print price.index.values
+    print "..."
 #print yf_data
