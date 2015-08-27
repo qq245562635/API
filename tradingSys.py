@@ -15,6 +15,7 @@ class tradingSys(object):
 
     beginDate = dt.date(2015,6,1)
     endDate = dt.date(2015,6,30)
+
     def fetchDataFromDB(self,symbol,beginDate,endDate):
         hostName = 'localhost'
         userName = 'sec_user'
@@ -48,12 +49,8 @@ class tradingSys(object):
         for index in range(len(priceData)):
             priceData.priceDate[index] = dt.datetime.strptime(priceData.priceDate[index],"%Y-%m-%d")
         priceData.index = priceData.priceDate
-        del priceData['priceDate']
-        #print type(priceData.index.values[0])
         price = priceData.loc[date,priceType]
-        print "price: ", price
         self.cash = self.cash - price * shares
-        #print "cash: ", self.cash
         self.equity = self.equity + price * shares
         self.portfolio['CASH'] = self.cash
         self.portfolio[stock] = shares
