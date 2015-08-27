@@ -15,13 +15,16 @@ print dict
 
 import sys
 import datetime as dt
-print sys.path[0]
+#print sys.path[0]
 import pandas as pd
 path = sys.path[0] + '/GOOG.csv'
 data = pd.read_csv(path)
+a = []
 for index in range(len(data)):
-    data.priceDate[index] = dt.datetime.strptime(data.priceDate[index],"%Y-%m-%d")
-data.index = data.priceDate
+    #a = data.priceDate[index]
+    a.append(dt.datetime.strptime(data.priceDate[index], "%Y-%m-%d"))
+
+data.index = a
 print data.index.values[0]
 
 del data['priceDate']
