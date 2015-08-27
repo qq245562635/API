@@ -14,11 +14,18 @@ print dict
 '''
 
 import sys
+import datetime as dt
 print sys.path[0]
 import pandas as pd
 path = sys.path[0] + '/GOOG.csv'
 data = pd.read_csv(path)
-print data.loc[1,'priceDate']
+for index in range(len(data)):
+    data.priceDate[index] = dt.datetime.strptime(data.priceDate[index],"%Y-%m-%d")
+data.index = data.priceDate
+print data.index.values[0]
+
+del data['priceDate']
+#dt = dt.datetime.strptime(, "%Y-%m-%d)
 '''
 import datetime as dt
 a = dt.date(2015,5,1)

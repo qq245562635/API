@@ -15,6 +15,7 @@ class tradingSys(object):
 
     beginDate = dt.date(2015,6,1)
     endDate = dt.date(2015,6,30)
+
     def fetchDataFromDB(self,symbol,beginDate,endDate):
         hostName = 'localhost'
         userName = 'sec_user'
@@ -45,8 +46,9 @@ class tradingSys(object):
     def order(self, stock, shares,date,priceType):
         path = sys.path[0] + '/'+stock+'.csv'
         priceData = pd.read_csv(path)
+        for index in range(len(priceData)):
+            priceData.priceDate[index] = dt.datetime.strptime(priceData.priceDate[index],"%Y-%m-%d")
         priceData.index = priceData.priceDate
-        del dataDF['priceDate']
         price = priceData.loc[date,priceType]
         self.cash = self.cash - price * shares
         self.equity = self.equity + price * shares
@@ -54,5 +56,14 @@ class tradingSys(object):
         self.portfolio[stock] = shares
 
 
+<<<<<<< HEAD
 
 
+=======
+mytradingSys = tradingSys()
+beginDate = dt.date(2015,6,1)
+endDate = dt.date(2015,6,30)
+#mytradingSys.fetchDataFromDB('GOOG',beginDate,endDate)
+mytradingSys.order('GOOG',20,beginDate,'adjClosePrice')
+print mytradingSys.portfolio
+>>>>>>> origin/master
