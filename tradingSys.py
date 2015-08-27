@@ -68,14 +68,11 @@ class tradingSys(object):
 
 
 
-<<<<<<< HEAD
 
-
-=======
 mytradingSys = tradingSys()
 beginDate = dt.date(2015,6,1)
 endDate = dt.date(2015,6,30)
 #mytradingSys.fetchDataFromDB('GOOG',beginDate,endDate)
 mytradingSys.order('GOOG',20,beginDate,'adjClosePrice')
 print mytradingSys.portfolio
->>>>>>> origin/master
+

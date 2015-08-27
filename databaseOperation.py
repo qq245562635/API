@@ -40,11 +40,10 @@ def fetchDataFromDB(symbol,beginDate,endDate):
     return results
     db.close()
 
-<<<<<<< HEAD
 #for sym in symbol:
 #    loadDataIntoDB(sym,beginDate,endDate)
 
-=======
+
 for sym in symbol:
     loadDataIntoDB(sym,beginDate,endDate)
 '''
