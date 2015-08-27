@@ -45,13 +45,23 @@ class tradingSys(object):
     def order(self, stock, shares,date,priceType):
         path = sys.path[0] + '/'+stock+'.csv'
         priceData = pd.read_csv(path)
+        for index in range(len(priceData)):
+            priceData.priceDate[index] = dt.datetime.strptime(priceData.priceDate[index],"%Y-%m-%d")
         priceData.index = priceData.priceDate
-        del dataDF['priceDate']
+        del priceData['priceDate']
+        #print type(priceData.index.values[0])
         price = priceData.loc[date,priceType]
+        print "price: ", price
         self.cash = self.cash - price * shares
+        #print "cash: ", self.cash
         self.equity = self.equity + price * shares
         self.portfolio['CASH'] = self.cash
         self.portfolio[stock] = shares
 
 
-
+mytradingSys = tradingSys()
+beginDate = dt.date(2015,6,1)
+endDate = dt.date(2015,6,30)
+#mytradingSys.fetchDataFromDB('GOOG',beginDate,endDate)
+mytradingSys.order('GOOG',20,beginDate,'adjClosePrice')
+print mytradingSys.portfolio
