@@ -15,9 +15,14 @@ class tradingSys(object):
 
     beginDate = dt.date(2015,6,1)
     endDate = dt.date(2015,6,30)
+<<<<<<< Updated upstream
     filePath = sys.path[0] + '/log.txt'
     logFile = open(filePath,'w')
     logFile.write("Trading log:\n")
+=======
+
+    # download data from SQL database to desktop
+>>>>>>> Stashed changes
     def fetchDataFromDB(self,symbol,beginDate,endDate):
         hostName = 'localhost'
         userName = 'sec_user'
@@ -43,11 +48,16 @@ class tradingSys(object):
         dataDF.to_csv(path)
         print "Download data succeeded!!!"
 
+<<<<<<< Updated upstream
     def fetchPortfolioData(self, stockList, beginDate, endDate):
         for stock in stockList:
             self.portfolioData[stock] = self.fetchDataFromDB(stock,beginDate,endDate)
 
     def order(self, stock, shares, date,priceType):
+=======
+    # 
+    def order(self, stock, shares,date,priceType):
+>>>>>>> Stashed changes
         path = sys.path[0] + '/'+stock+'.csv'
         priceData = pd.read_csv(path)
         indexName = []
@@ -67,8 +77,11 @@ class tradingSys(object):
         self.logFile.close()
 
 
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 mytradingSys = tradingSys()
 beginDate = dt.date(2015,6,1)
 endDate = dt.date(2015,6,30)
